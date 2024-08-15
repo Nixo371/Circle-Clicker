@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Click : MonoBehaviour
 {
-    public Counter counter;
+    private List<ClickObserver> observers = new List<ClickObserver>();
     BoxCollider2D collider;
 
     void Start()
@@ -18,9 +18,17 @@ public class Click : MonoBehaviour
         collider.isTrigger = true;
     }
 
+    public void register(ClickObserver observer)
+    {
+        observers.Add(observer);
+    }
+
     public void OnMouseDown()
     {
-        counter.addClicks();
+        foreach (ClickObserver observer in observers)
+        {
+            observer.onClick();
+        }
     }
 
 }
