@@ -8,7 +8,7 @@ public class Click : MonoBehaviour
     public Counter counter;
     BoxCollider2D collider;
 
-	void Start()
+    void Start()
     {
         transform.position = new Vector3(0, 0, 0);
         transform.localScale = new Vector3 (1, 1, 1);
@@ -18,9 +18,9 @@ public class Click : MonoBehaviour
         collider.isTrigger = true;
     }
 
-	public void OnMouseDown()
-	{
-		counter.addClicks();
-	}
+    public void OnMouseDown()
+    {
+        counter.addClicks();
+    }
 
 }
