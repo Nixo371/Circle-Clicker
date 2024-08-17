@@ -7,7 +7,7 @@ public class PauseMenu : MonoBehaviour
     public Button resumeButton;
     public Button quitButton;
 
-    private bool isPaused = false;
+    public bool isPaused = false;
 
     void Start()
     {
