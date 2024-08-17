@@ -154,6 +154,8 @@ MonoBehaviour:
   pauseMenuPanel: {fileID: 1931814079}
   resumeButton: {fileID: 1700766488}
   quitButton: {fileID: 254710702}
+  isPaused: 0
+  boxCollider: {fileID: 1753010077}
 --- !u!4 &34588676
 Transform:
   m_ObjectHideFlags: 0
