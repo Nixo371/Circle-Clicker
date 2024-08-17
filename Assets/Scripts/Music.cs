@@ -1,53 +1,110 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MusicManager : MonoBehaviour
 {
-    public AudioSource audioSource;
-    public AudioClip[] musicTracks;
+    public AudioSource audioSource;     // Reference to the AudioSource component
+    public AudioClip[] musicClips;      // Array to hold the music clips
+    public Button playButton;           // Button to play or resume the music
+    public Button pauseButton;          // Button to pause the music
+    public Button nextButton;           // Button to play the next song
+    public Button previousButton;       // Button to play the previous song
+
+    private int currentClipIndex = 0;   // Index to track the current playing clip
+    private bool isPaused = false;      // Flag to track if the music is paused
 
     void Start()
     {
-        PlayMusicTrack(1); // Play the first track by default
-    }
-
-    public void PlayMusicTrack(int trackNumber)
-    {
-        if (trackNumber < 1 || trackNumber > musicTracks.Length)
+        // Ensure AudioSource is assigned
+        if (audioSource == null)
         {
-            Debug.LogWarning("Track number out of range!");
+            Debug.LogError("AudioSource is not assigned.");
             return;
         }
 
-        AudioClip clip = musicTracks[trackNumber - 1];
-        audioSource.clip = clip;
-        audioSource.Play();
-    }
-
-    void StopMusic()
-    {
-        if (audioSource.isPlaying)
+        // Ensure musicClips array is not empty
+        if (musicClips.Length == 0)
         {
-            audioSource.Stop();
+            Debug.LogError("No music clips assigned.");
+            return;
         }
+
+        // Assign button click listeners
+        playButton.onClick.AddListener(PlayOrResumeMusic);
+        pauseButton.onClick.AddListener(PauseMusic);
+        nextButton.onClick.AddListener(PlayNextClip);
+        previousButton.onClick.AddListener(PlayPreviousClip);
+
+        // Start playing the first song
+        PlayClip(currentClipIndex);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        // Check if the current audio clip has finished playing
+        if (!audioSource.isPlaying && !isPaused && musicClips.Length > 0)
         {
-            PlayMusicTrack(1);
+            PlayNextClip();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+    }
+
+    void PlayClip(int index)
+    {
+        if (index < 0 || index >= musicClips.Length)
         {
-            PlayMusicTrack(2);
+            Debug.LogError("Invalid clip index.");
+            return;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+
+        audioSource.Stop();
+        audioSource.clip = musicClips[index];
+        audioSource.Play();
+        isPaused = false;
+        currentClipIndex = index;
+    }
+
+    public void PlayOrResumeMusic()
+    {
+        if (isPaused)
         {
-            PlayMusicTrack(3);
+            audioSource.UnPause();
+            isPaused = false;
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else
         {
-            StopMusic();
+            PlayClip(currentClipIndex);
         }
+        ResetButtonState(playButton);
+    }
+
+    public void PauseMusic()
+    {
+        if (audioSource.isPlaying)
+        {
+            audioSource.Pause();
+            isPaused = true;
+        }
+        ResetButtonState(pauseButton);
+    }
+
+    public void PlayNextClip()
+    {
+        // Move to the next clip index
+        currentClipIndex = (currentClipIndex + 1) % musicClips.Length;
+        PlayClip(currentClipIndex);
+        ResetButtonState(nextButton);
+    }
+
+    public void PlayPreviousClip()
+    {
+        // Move to the previous clip index
+        currentClipIndex = (currentClipIndex - 1 + musicClips.Length) % musicClips.Length;
+        PlayClip(currentClipIndex);
+        ResetButtonState(previousButton);
+    }
+    void ResetButtonState(Button button)
+    {
+        button.interactable = false;  // Temporarily disable the button
+        button.interactable = true;   // Re-enable the button, resetting its state
     }
 }
