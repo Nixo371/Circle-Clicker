@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Click : MonoBehaviour
+public class ClickableBox : MonoBehaviour
 {
     private List<ClickObserver> observers = new List<ClickObserver>();
+    public WindowInfo windowInfo;
     BoxCollider2D collider;
 
     void Start()
     {
         collider = GetComponent<BoxCollider2D>();
         collider.offset = new Vector2(0, 0);
-        collider.size = new Vector2(Screen.width, Screen.height);
+        collider.size = new Vector2(windowInfo.width, windowInfo.height);
         collider.isTrigger = true;
     }
 
