@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleClick : MonoBehaviour
+public class CircleBehavior : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
