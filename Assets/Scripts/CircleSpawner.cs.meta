@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b3e7937a3c1b0904089d72600f0c9caa
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - clickText: {instanceID: 0}
+  - click: {instanceID: 0}
+  - clickableCircle: {fileID: 4755038840432435570, guid: 8a3d0928549ff3049b58f888ac7a16ed, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

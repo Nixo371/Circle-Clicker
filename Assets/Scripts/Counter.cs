@@ -20,8 +20,6 @@ public class Counter : MonoBehaviour, ClickObserver
     [ContextMenu("Click")]
     public void onClick()
     {
-
-
         clickCount++;
         clickText.text = clickCount.ToString();
         CounterIncremented?.Invoke();
