@@ -36,11 +36,39 @@ public class MusicManager : MonoBehaviour
         // Start playing the first song
         PlayClip(currentClipIndex);
     }
+    void OnApplicationFocus(bool hasFocus)
+    {
+        // This is called when the app gains or loses focus
+        if (!hasFocus)
+        {
+            // App lost focus, save the current playback time
+            SavePlaybackPosition();
+            audioSource.Pause(); // Pause the music
+        }
+        else if (isPaused == false)
+        {
+            // App gained focus, resume playback from saved position
+            ResumePlayback();
+        }
+    }
 
+    void SavePlaybackPosition()
+    {
+        // Save the current time of the track
+        PlayerPrefs.SetFloat("MusicPlaybackTime", audioSource.time);
+    }
+
+    void ResumePlayback()
+    {
+        // Retrieve the saved playback time
+        float savedTime = PlayerPrefs.GetFloat("MusicPlaybackTime", 0f);
+        audioSource.time = savedTime;
+        audioSource.Play(); // Resume playback from the saved time
+    }
     void Update()
     {
         // Check if the current audio clip has finished playing
-        if (!audioSource.isPlaying && !isPaused && musicClips.Length > 0)
+        if (!audioSource.isPlaying && !isPaused && audioSource.time >= audioSource.clip.length)
         {
             PlayNextClip();
         }
