@@ -25,7 +25,7 @@ public class CircleSpawner : MonoBehaviour, ClickObserver
 		w = windowInfo.width - (2 * notSpawnableBorder);
 		h = windowInfo.height - (2 * notSpawnableBorder);
 
-		rarity = 1f / 100;
+		rarity = 1f / 10;
 	}
 
     [ContextMenu("Click")]

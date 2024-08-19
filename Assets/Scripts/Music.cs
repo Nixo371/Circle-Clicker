@@ -6,7 +6,6 @@ public class MusicManager : MonoBehaviour
     public AudioSource audioSource;     // Reference to the AudioSource component
     public AudioClip[] musicClips;      // Array to hold the music clips
     public Button playButton;           // Button to play or resume the music
-    public Button pauseButton;          // Button to pause the music
     public Button nextButton;           // Button to play the next song
     public Button previousButton;       // Button to play the previous song
 
@@ -31,7 +30,6 @@ public class MusicManager : MonoBehaviour
 
         // Assign button click listeners
         playButton.onClick.AddListener(PlayOrResumeMusic);
-        pauseButton.onClick.AddListener(PauseMusic);
         nextButton.onClick.AddListener(PlayNextClip);
         previousButton.onClick.AddListener(PlayPreviousClip);
 
@@ -65,10 +63,18 @@ public class MusicManager : MonoBehaviour
 
     public void PlayOrResumeMusic()
     {
+        Text playButtonText = playButton.GetComponentInChildren<Text>();
         if (isPaused)
         {
             audioSource.UnPause();
             isPaused = false;
+            playButtonText.text = "Pause";
+        }
+        else if (audioSource.isPlaying)
+        {
+            audioSource.Pause();
+            isPaused = true;
+            playButtonText.text = "Play";
         }
         else
         {
@@ -76,17 +82,6 @@ public class MusicManager : MonoBehaviour
         }
         ResetButtonState(playButton);
     }
-
-    public void PauseMusic()
-    {
-        if (audioSource.isPlaying)
-        {
-            audioSource.Pause();
-            isPaused = true;
-        }
-        ResetButtonState(pauseButton);
-    }
-
     public void PlayNextClip()
     {
         // Move to the next clip index
