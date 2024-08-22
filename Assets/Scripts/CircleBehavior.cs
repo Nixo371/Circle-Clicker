@@ -1,23 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Experimental.GlobalIllumination;
 
-public class CircleBehavior : MonoBehaviour
+public class CircleBehavior : MonoBehaviour, IPointerClickHandler
 {
-    // Start is called before the first frame update
-    void Start()
+
+	private void Start()
+	{
+		addPhysics2DRaycaster();
+	}
+	public void OnPointerClick(PointerEventData eventData)
     {
-        
+		UnityEngine.Debug.Log("Circle Clicked");
+		Object.Destroy(this.gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void OnMouseDown()
-    {
-        Object.Destroy(this.gameObject);
+	private void addPhysics2DRaycaster()
+	{
+		Physics2DRaycaster physicsRaycaster = FindObjectOfType<Physics2DRaycaster>();
+        if (physicsRaycaster == null)
+        {
+			Camera.main.gameObject.AddComponent<Physics2DRaycaster>();
+        }
     }
 }

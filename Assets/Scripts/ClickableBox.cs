@@ -7,14 +7,14 @@ public class ClickableBox : MonoBehaviour
 {
     private List<ClickObserver> observers = new List<ClickObserver>();
     public WindowInfo windowInfo;
-    BoxCollider2D collider;
+    BoxCollider2D clickCollider;
 
     void Start()
     {
-        collider = GetComponent<BoxCollider2D>();
-        collider.offset = new Vector2(0, 0);
-        collider.size = new Vector2(windowInfo.width, windowInfo.height);
-        collider.isTrigger = true;
+		clickCollider = GetComponent<BoxCollider2D>();
+		clickCollider.offset = new Vector2(0, 0);
+		clickCollider.size = new Vector2(windowInfo.width, windowInfo.height);
+		clickCollider.isTrigger = true;
     }
 
     public void register(ClickObserver observer)

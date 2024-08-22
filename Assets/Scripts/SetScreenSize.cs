@@ -9,7 +9,9 @@ public class SetScreenSize : MonoBehaviour
 	void Start()
 	{
 		transform.position = new Vector3(0, 0, 0);
-		transform.localScale = new Vector3(windowInfo.width, windowInfo.height, 0);
+		RectTransform rectTransform = GetComponent<RectTransform>();
+		rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, windowInfo.width);
+		rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, windowInfo.height);
 	}
 
 	// Update is called once per frame

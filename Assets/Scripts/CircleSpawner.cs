@@ -14,7 +14,7 @@ public class CircleSpawner : MonoBehaviour, ClickObserver
 	int notSpawnableBorder;
 	int w;
 	int h;
-	float rarity;
+	public int rarity;
 
 	void Start()
     {
@@ -25,7 +25,7 @@ public class CircleSpawner : MonoBehaviour, ClickObserver
 		w = windowInfo.width - (2 * notSpawnableBorder);
 		h = windowInfo.height - (2 * notSpawnableBorder);
 
-		rarity = 1f / 10;
+		rarity = 10;
 	}
 
     [ContextMenu("Click")]
@@ -33,7 +33,7 @@ public class CircleSpawner : MonoBehaviour, ClickObserver
     {
         UnityEngine.Debug.Log("Clicked");
 
-		if (Random.value < rarity)
+		if (Random.value < 1.0f / rarity)
 		{
 			int x = (int) Mathf.Floor(Random.value * w) - (w / 2);
 			int y = (int) Mathf.Floor(Random.value * h) - (h / 2);
