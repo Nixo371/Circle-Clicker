@@ -31,8 +31,6 @@ public class CircleSpawner : MonoBehaviour, ClickObserver
     [ContextMenu("Click")]
     public void onClick()
     {
-        UnityEngine.Debug.Log("Clicked");
-
 		if (Random.value < 1.0f / rarity)
 		{
 			int x = (int) Mathf.Floor(Random.value * w) - (w / 2);

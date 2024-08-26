@@ -5,36 +5,38 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private Dictionary<Item, int> items;
+	// ID -> count
+	private Dictionary<int, int> items = new Dictionary<int, int>();
 
-    // Start is called before the first frame update
-    void Start()
+    public void registerItem(int id, int count = 0)
     {
-        items = new Dictionary<Item, int>();
+        items.Add(id, count);
     }
-
-    // Update is called once per frame
-    void Update()
+    public void addItem(int id, int count = 1)
     {
-        
-    }
-
-    public void registerItem(Item item, int count = 0)
-    {
-        items.Add(item, count);
-    }
-    public void addItem(Item item, int count)
-    {
-        items[item] += count;
-    }
-
-    public bool removeItem(Item item, int count) {
-        items[item] -= count;
-        if (items[item] < 0)
+        if (!items.ContainsKey(id))
         {
-            items[item] += count;
+            registerItem(id);
+        }
+        items[id] += count;
+	}
+
+    public bool removeItem(int id, int count) {
+        items[id] -= count;
+        if (items[id] < 0)
+        {
+            items[id] += count;
             return false;
         }
         return true;
+    }
+
+    public int getItemCount(int id)
+    {
+        if (items.ContainsKey(id))
+        {
+            return items[id];
+        }
+        return 0;
     }
 }
