@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 
+[Serializable]
 public class Inventory : MonoBehaviour
 {
+    public string path = "inventory";
 	// ID -> count
 	private Dictionary<int, int> items = new Dictionary<int, int>();
 

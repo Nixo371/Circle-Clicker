@@ -6,7 +6,7 @@ using UnityEngine.Experimental.GlobalIllumination;
 
 public class CircleBehavior : MonoBehaviour, IPointerClickHandler, Item
 {
-	public Inventory inventory;
+	public Player player;
 	public float timer = 0;
 	public float maxTime = 3;
 	public float fadeTimeStart = 2;
@@ -30,7 +30,7 @@ public class CircleBehavior : MonoBehaviour, IPointerClickHandler, Item
 	public int getItemID() { return 1; }
 	public void OnPointerClick(PointerEventData eventData)
     {
-		inventory.addItem(getItemID());
+		player.inventory.addItem(getItemID());
 		Object.Destroy(this.gameObject);
     }
 

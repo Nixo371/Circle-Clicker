@@ -98,9 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85724e125cc517a498649a6d643a774c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 8811410587544987374, guid: 978ea798931bdd2489c26010190e54ba, type: 3}
+  player: {fileID: 4569550142571312394, guid: ef51f5427f09fd64a81c0e073a8f8f6a, type: 3}
   timer: 0
   maxTime: 3
+  fadeTimeStart: 2
 --- !u!58 &3941160876315205546
 CircleCollider2D:
   m_ObjectHideFlags: 0

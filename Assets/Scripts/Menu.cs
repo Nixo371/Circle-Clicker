@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuPanel;  // Drag your Panel here in the Inspector
     public Button resumeButton;
     public Button quitButton;
+    public Player player;
 
     public bool isPaused = false;
     public BoxCollider2D boxCollider; // Reference to the BoxCollider2D you want to control
@@ -23,6 +24,7 @@ public class PauseMenu : MonoBehaviour
         {
             boxCollider.enabled = true;
         }
+        player = FindObjectOfType<Player>();
     }
 
     void Update()
@@ -72,14 +74,11 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;  // Stop playing the game in the editor
-        #else
+        player.save();
         Application.Quit();  // Quit the game
-        #endif
-    }
+	}
 
-    void ResetButtonState(Button button)
+	void ResetButtonState(Button button)
     {
         button.interactable = false;  // Temporarily disable the button
         button.interactable = true;   // Re-enable the button, resetting its state

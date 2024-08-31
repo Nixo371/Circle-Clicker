@@ -4,15 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Counter : MonoBehaviour, ClickObserver
 {
-    public int clickCount;
+    public PlayerSave save;
     public Text clickText;
     public ClickableBox click;
     public delegate void OnCounterIncremented();
     public static event OnCounterIncremented CounterIncremented;
     void Start()
     {
-        clickCount = 0;
-        clickText.text = "0";
+        clickText.text = save.clickCount.ToString();
 
         click.register(this);
     }
@@ -20,8 +19,13 @@ public class Counter : MonoBehaviour, ClickObserver
     [ContextMenu("Click")]
     public void onClick()
     {
-        clickCount++;
-        clickText.text = clickCount.ToString();
+        save.clickCount++;
+        clickText.text = save.clickCount.ToString();
         CounterIncremented?.Invoke();
     }
+
+	public void refresh()
+	{
+        clickText.text = save.clickCount.ToString();
+	}
 }
