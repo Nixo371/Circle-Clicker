@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.Collections;
 using UnityEngine;
 
-[Serializable]
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, Saveable
 {
     public string path = "inventory";
 	// ID -> count
@@ -42,4 +42,48 @@ public class Inventory : MonoBehaviour
         }
         return 0;
     }
+
+    public void load()
+    {
+		string load_path = Path.Combine(Application.persistentDataPath, path);
+
+		if (File.Exists(load_path))
+        {
+            string json = File.ReadAllText(load_path);
+            string[] lines = json.Split('\n');
+			for (int i = 0; i < lines.Length; i++)
+            {
+                string line = lines[i];
+                
+                if (line[0] == '{' || line[0] == '}')
+                {
+                    // Start or end, no data
+                    continue;
+                }
+
+                string[] values = line.Split(':');
+                int key = int.Parse(values[0].Trim());
+                int value = int.Parse(values[1].Trim());
+
+                items[key] = value;
+            }
+        }
+    }
+
+    public void save()
+    {
+		string save_path = Path.Combine(Application.persistentDataPath, path);
+
+		string json = "{\n";
+        foreach (KeyValuePair<int, int> kvp in items)
+        {
+            int key = kvp.Key;
+            int value = kvp.Value;
+
+            json += key.ToString() + ": " + value.ToString() + "\n";
+        }
+        json += "}";
+
+		File.WriteAllText(save_path, json);
+	}
 }
