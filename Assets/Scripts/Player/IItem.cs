@@ -1,4 +1,4 @@
-public interface Item
+public interface IItem
 {
 	public int getItemID();
 }

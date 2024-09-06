@@ -5,7 +5,7 @@ using System.IO;
 using Unity.Collections;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour, Saveable
+public class Inventory : MonoBehaviour, ISavable
 {
     public string path = "inventory";
 	// ID -> count
