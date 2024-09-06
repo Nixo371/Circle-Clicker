@@ -1,4 +1,4 @@
-public interface Saveable
+public interface ISavable
 {
 	public void load();
 	public void save();

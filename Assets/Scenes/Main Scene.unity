@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 293892986}
   - component: {fileID: 293892985}
   m_Layer: 0
-  m_Name: CircleSpawner
+  m_Name: ShapeSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -719,9 +719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickableBox: {fileID: 1753010076}
-  clickableCircle: {fileID: 4755038840432435570, guid: 8a3d0928549ff3049b58f888ac7a16ed, type: 3}
   windowInfo: {fileID: 1596848860}
-  rarity: 0
 --- !u!4 &293892986
 Transform:
   m_ObjectHideFlags: 0

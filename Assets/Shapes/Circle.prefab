@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 180326958746142854}
   - component: {fileID: 3941160876315205546}
   m_Layer: 0
-  m_Name: ClickableCircle
+  m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

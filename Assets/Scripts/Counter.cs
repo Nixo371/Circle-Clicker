@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Counter : MonoBehaviour, ClickObserver
+public class Counter : MonoBehaviour, IClickObserver
 {
     public PlayerSave save;
     public Text clickText;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CircleCounter : MonoBehaviour
 {
-    public CircleBehavior circle;
+    public Circle circle;
     public Inventory inventory;
 	public Text circleText;
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ClickableBox : MonoBehaviour
 {
-    private List<ClickObserver> observers = new List<ClickObserver>();
+    private List<IClickObserver> observers = new List<IClickObserver>();
     public WindowInfo windowInfo;
     BoxCollider2D clickCollider;
 
@@ -17,14 +17,14 @@ public class ClickableBox : MonoBehaviour
 		clickCollider.isTrigger = true;
     }
 
-    public void register(ClickObserver observer)
+    public void register(IClickObserver observer)
     {
         observers.Add(observer);
     }
 
     public void OnMouseDown()
     {
-        foreach (ClickObserver observer in observers)
+        foreach (IClickObserver observer in observers)
         {
             observer.onClick();
         }

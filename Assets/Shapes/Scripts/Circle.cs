@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Experimental.GlobalIllumination;
 
-public class CircleBehavior : MonoBehaviour, IPointerClickHandler, Item
+public class Circle : MonoBehaviour, IPointerClickHandler, IItem, ISpawnable
 {
 	public Player player;
-	public float timer = 0;
-	public float maxTime = 3;
-	public float fadeTimeStart = 2;
+	float timer = 0;
+	float maxTime = 3;
+	float fadeTimeStart = 2;
     private SpriteRenderer spriteRenderer;
+
+	private static int rarity = 50;
 
     private void Start()
 	{
@@ -27,20 +30,19 @@ public class CircleBehavior : MonoBehaviour, IPointerClickHandler, Item
 		updateFade();
 	}
 
+	public void spawn(int x, int y, int scale)
+	{
+		GameObject newShape = Instantiate(getGameObject(), new Vector3(x, y, 0), Quaternion.identity);
+		newShape.transform.localScale = new Vector3(scale, scale, 0);
+	}
+
 	public int getItemID() { return 1; }
+	public int getRarity() { return rarity; }
+	public GameObject getGameObject() { return (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Shapes/Circle.prefab", typeof(GameObject)); }
 	public void OnPointerClick(PointerEventData eventData)
     {
 		player.inventory.addItem(getItemID());
 		Object.Destroy(this.gameObject);
-    }
-
-	private void addPhysics2DRaycaster()
-	{
-		Physics2DRaycaster physicsRaycaster = FindObjectOfType<Physics2DRaycaster>();
-        if (physicsRaycaster == null)
-        {
-			Camera.main.gameObject.AddComponent<Physics2DRaycaster>();
-        }
     }
 
 	private void checkExpired()
@@ -69,4 +71,13 @@ public class CircleBehavior : MonoBehaviour, IPointerClickHandler, Item
             setTransparency(newTransparency);
         }
     }
+
+	private void addPhysics2DRaycaster()
+	{
+		Physics2DRaycaster physicsRaycaster = FindObjectOfType<Physics2DRaycaster>();
+		if (physicsRaycaster == null)
+		{
+			Camera.main.gameObject.AddComponent<Physics2DRaycaster>();
+		}
+	}
 }
