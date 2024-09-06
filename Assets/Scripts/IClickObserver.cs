@@ -1,4 +1,4 @@
-public interface ClickObserver
+public interface IClickObserver
 {
 	void onClick();
 }

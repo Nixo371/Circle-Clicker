@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShapeSpawner : MonoBehaviour, ClickObserver
+public class ShapeSpawner : MonoBehaviour, IClickObserver
 {
     public ClickableBox clickableBox;
     public WindowInfo windowInfo;
