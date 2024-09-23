@@ -5,9 +5,6 @@ public class MusicManager : MonoBehaviour
 {
     public AudioSource audioSource;     // Reference to the AudioSource component
     public AudioClip[] musicClips;      // Array to hold the music clips
-    public Button playButton;           // Button to play or resume the music
-    public Button nextButton;           // Button to play the next song
-    public Button previousButton;       // Button to play the previous song
 
     private int currentClipIndex = 0;   // Index to track the current playing clip
     private bool isPaused = false;      // Flag to track if the music is paused
@@ -27,11 +24,6 @@ public class MusicManager : MonoBehaviour
             Debug.LogError("No music clips assigned.");
             return;
         }
-
-        // Assign button click listeners
-        playButton.onClick.AddListener(PlayOrResumeMusic);
-        nextButton.onClick.AddListener(PlayNextClip);
-        previousButton.onClick.AddListener(PlayPreviousClip);
 
         // Start playing the first song
         PlayClip(currentClipIndex);
@@ -91,31 +83,26 @@ public class MusicManager : MonoBehaviour
 
     public void PlayOrResumeMusic()
     {
-        Text playButtonText = playButton.GetComponentInChildren<Text>();
         if (isPaused)
         {
             audioSource.UnPause();
             isPaused = false;
-            playButtonText.text = "Pause";
         }
         else if (audioSource.isPlaying)
         {
             audioSource.Pause();
             isPaused = true;
-            playButtonText.text = "Play";
         }
         else
         {
             PlayClip(currentClipIndex);
         }
-        ResetButtonState(playButton);
     }
     public void PlayNextClip()
     {
         // Move to the next clip index
         currentClipIndex = (currentClipIndex + 1) % musicClips.Length;
         PlayClip(currentClipIndex);
-        ResetButtonState(nextButton);
     }
 
     public void PlayPreviousClip()
@@ -123,7 +110,6 @@ public class MusicManager : MonoBehaviour
         // Move to the previous clip index
         currentClipIndex = (currentClipIndex - 1 + musicClips.Length) % musicClips.Length;
         PlayClip(currentClipIndex);
-        ResetButtonState(previousButton);
     }
     void ResetButtonState(Button button)
     {
